@@ -66,7 +66,25 @@ $.ajax({
 });
 
 //通过事件委托的方式为编辑按钮添加点击事件
-$('userBox').on('click','.edit',function(){
+$('#userBox').on('click','.edit', function(){
+    //获取被点击用户的id值
+    var id = $(this).attr('data-id');
+    //根据id获取用户的详细信息
+    $.ajax({
+        type:'get',
+        url:'/users/'+ id,
+        success:function(response) {
+            console.log(response)
+            var html = template('modifyTpl',response)
+            $('#modifyBox').html(html);
+            
+            
+
+        }
+    })
+});
+//修改表单添加表单提交事件
+$('modifyBox').on('submit','#modifyForm',function() {
 
 });
 
